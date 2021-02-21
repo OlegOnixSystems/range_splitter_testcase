@@ -8,8 +8,8 @@
 * Make a pull request for review
 
 ### Description
-Complete the method `RangeSplitter.slit_for_chunks`, all cases of `spec/range_splitter_spec.rb` should 
-be passed. Method `slit_for_chunks` receives two parameters:
+Complete the method `RangeSplitter.split_for_chunks`, all cases of `spec/range_splitter_spec.rb` should 
+be passed. Method `split_for_chunks` receives two parameters:
 * `price_per_day` - list of amounts per date as Date => Integer;
 * `max_chunk_length` - integer of the maximum length of the chunk.
 

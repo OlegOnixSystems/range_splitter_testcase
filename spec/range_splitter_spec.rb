@@ -4,10 +4,10 @@ require 'date'
 require 'range_splitter'
 
 RSpec.describe RangeSplitter do
-  describe '#slit_for_chunks' do
+  describe '#split_for_chunks' do
     context 'when block is given and it returns a result' do
       subject do
-        described_class.new.slit_for_chunks(price_per_day, max_chunk_length) do |date_from, date_to, amount|
+        described_class.new.split_for_chunks(price_per_day, max_chunk_length) do |date_from, date_to, amount|
           [date_from.to_s, date_to.to_s, amount.to_s].join(' / ')
         end
       end
@@ -46,7 +46,7 @@ RSpec.describe RangeSplitter do
       end
 
       it 'yields the given block once with the first and last date of the range and amount' do
-        expect { |b| subject.slit_for_chunks(price_per_day, max_chunk_length, &b) }.to(
+        expect { |b| subject.split_for_chunks(price_per_day, max_chunk_length, &b) }.to(
           yield_with_args(Date.new(2020, 10, 11), Date.new(2020, 10, 15), 50_900)
         )
       end
@@ -68,7 +68,7 @@ RSpec.describe RangeSplitter do
       end
 
       it 'yields the given block twice with dates and amounts for each chunk' do
-        expect { |b| subject.slit_for_chunks(price_per_day, max_chunk_length, &b) }.to(
+        expect { |b| subject.split_for_chunks(price_per_day, max_chunk_length, &b) }.to(
           yield_successive_args(
             [Date.new(2020, 9, 15), Date.new(2020, 9, 19), 51_100],
             [Date.new(2020, 9, 20), Date.new(2020, 9, 22), 30_700]
